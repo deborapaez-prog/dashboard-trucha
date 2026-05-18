@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐟 Producción Trucha — Brugali</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"
+        integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi"
+        crossorigin="anonymous"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f0f4f8;
+    color: #2d3748;
+    padding: 24px;
+    min-height: 100vh;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header h1 { font-size: 1.8rem; font-weight: 700; color: #1a365d; }
+  .badge {
+    background: #ebf8ff;
+    border: 1px solid #bee3f8;
+    color: #2b6cb0;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .card.kpi { text-align: center; }
+  .card.kpi .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #718096;
+    margin-bottom: 8px;
+  }
+  .card.kpi .value {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #1a365d;
+    line-height: 1;
+  }
+  .card.kpi .sub {
+    font-size: 0.8rem;
+    color: #a0aec0;
+    margin-top: 6px;
+  }
+  .card.kpi .up   { color: #38a169; font-weight: 700; }
+  .card.kpi .down { color: #e53e3e; font-weight: 700; }
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+  @media(max-width:700px){ .charts-grid { grid-template-columns: 1fr; } }
+  .card h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 16px;
+  }
+  .selector-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .selector-row label { font-size: 0.85rem; color: #718096; }
+  select {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    color: #2d3748;
+    background: #f7fafc;
+  }
+  .chart-wrap { position: relative; height: 260px; }
+  .detail-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; margin-top: 4px; }
+  .detail-table th {
+    background: #ebf8ff;
+    color: #2b6cb0;
+    text-align: right;
+    padding: 7px 10px;
+    font-weight: 600;
+  }
+  .detail-table th:first-child { text-align: left; }
+  .detail-table td { padding: 7px 10px; border-bottom: 1px solid #f0f4f8; text-align: right; }
+  .detail-table td:first-child { text-align: left; }
+  .detail-table tr:last-child td { border-bottom: none; }
+  .detail-table .total-row { background: #f7fafc; font-weight: 700; }
+  .detail-table .meta-row td { color: #718096; font-size: 0.8rem; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .note { font-size: 0.78rem; color: #a0aec0; margin-top: 8px; }
+  footer { text-align: center; font-size: 0.78rem; color: #a0aec0; margin-top: 8px; padding-top: 16px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🐟 Producción Trucha — Brugali</h1>
+  <span class="badge">📅 Actualizado: 18/05/2026</span>
+</header>
+
+<div class="kpi-grid">
+  <div class="card kpi">
+    <div class="label">Semana actual (S20)</div>
+    <div class="value" id="kpi-actual">—</div>
+    <div class="sub">kg producidos</div>
+  </div>
+  <div class="card kpi">
+    <div class="label">Semana anterior</div>
+    <div class="value" id="kpi-anterior">—</div>
+    <div class="sub">kg producidos</div>
+  </div>
+  <div class="card kpi">
+    <div class="label">Variación</div>
+    <div class="value" id="kpi-var">—</div>
+    <div class="sub">semana a semana</div>
+  </div>
+  <div class="card kpi">
+    <div class="label">Acumulado total</div>
+    <div class="value" id="kpi-total">—</div>
+    <div class="sub">kg acumulados</div>
+  </div>
+  <div class="card kpi">
+    <div class="label">Prom. cajas/día</div>
+    <div class="value" id="kpi-cajas">—</div>
+    <div class="sub">cajas entrada (S20)</div>
+  </div>
+  <div class="card kpi">
+    <div class="label">% Uso prom. (S20)</div>
+    <div class="value" id="kpi-uso">—</div>
+    <div class="sub">prod / entrada</div>
+  </div>
+</div>
+
+<div class="charts-grid">
+  <div class="card">
+    <h2>📊 Evolución semanal (kg totales)</h2>
+    <div class="chart-wrap"><canvas id="chartSemanal"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>📦 Producción diaria por producto</h2>
+    <div class="selector-row">
+      <label>Semana:</label>
+      <select id="weekSelect"></select>
+    </div>
+    <div class="chart-wrap"><canvas id="chartDiario"></canvas></div>
+    <p class="note">L = lunes · M = martes · X = miércoles · J = jueves · V = viernes · S = sábado</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>📋 Detalle por producto — S20 (11/05–15/05/2026) · Total: 754.4 kg</h2>
+  <table class="detail-table" id="detailTable"></table>
+</div>
+
+<footer>Datos registrados al 15/05/2026 · Semana actual S21 (18/05): sin producción registrada · Brugali — Ingeniería de Procesos</footer>
+
+<script>
+// ── DATOS INCRUSTADOS ─────────────────────────────────────────────────────────
+// Fuente: Google Drive - planilla de producción trucha (ID: 1j-hrr20tA_R690mz1sMsPn3ElNRqzdsFb42C8y8lfgE)
+// Actualizado: 18/05/2026
+// Semana ISO 20 (lunes 11/05 → viernes 15/05)
+// Nota: incluye "sin embolsar" del martes 12/05 (39.175 kg)
+// Nota: el lote 18052026 (lunes 18/05) tiene entrada=0 → descartado (sin producción aún)
+const WEEKS = [
+  {
+    label: "S20",
+    isoWeek: 20,
+    weekRange: "11/05 – 15/05",
+    total: 754.375,       // tiras+cortes+tiras_unidas+cubos+sin_embolsar los 5 días
+    activeDaysCount: 5,
+    promedioCajas: 27.8,  // (24+29+28+30+28) / 5
+    promedioUso: 36.45,   // promedio de (prodDia/entradaDia*100) en 5 días activos
+    entradaKgPerDay:       [360,     435,     420,     450,    420,   0],
+    entradaBandejasPerDay: [ 24,      29,      28,      30,     28,   0],
+    daily: [140.125, 175.225, 158.425, 94.4, 186.2, 0],
+    dailyByProd: {
+      "Tiras":          [35.525, 31.85,  15.925, 29.4,  44.1,  0],
+      "cortes":         [22,     16,     13,     16,    28,    0],
+      "tiras unidas":   [44.1,   39.2,   24.5,   49,    68.6,  0],
+      "cubos":          [38.5,   49,     105,     0,    45.5,  0],
+      "sin embolsar":   [ 0,     39.175,  0,      0,     0,    0]
+    }
+  }
+];
+
+const COLORS = {
+  "Tiras":          "#4299e1",
+  "cortes":         "#68d391",
+  "tiras unidas":   "#f6ad55",
+  "cubos":          "#fc8181",
+  "sin embolsar":   "#b794f4"
+};
+const PRODS = ["Tiras", "cortes", "tiras unidas", "cubos", "sin embolsar"];
+const DIAS  = ["L","M","X","J","V","S"];
+
+// ── KPIs ──────────────────────────────────────────────────────────────────────
+(function renderKPIs() {
+  const last = WEEKS[WEEKS.length - 1];
+  const prev = WEEKS.length > 1 ? WEEKS[WEEKS.length - 2] : null;
+  const acum = WEEKS.reduce(function(s, w) { return s + w.total; }, 0);
+
+  document.getElementById("kpi-actual").textContent =
+    last.total.toLocaleString("es-AR", {maximumFractionDigits:1}) + " kg";
+  document.getElementById("kpi-anterior").textContent =
+    prev ? prev.total.toLocaleString("es-AR", {maximumFractionDigits:1}) + " kg" : "Sin datos";
+  document.getElementById("kpi-total").textContent =
+    acum.toLocaleString("es-AR", {maximumFractionDigits:1}) + " kg";
+  document.getElementById("kpi-cajas").textContent = last.promedioCajas.toFixed(1);
+  document.getElementById("kpi-uso").textContent   = last.promedioUso.toFixed(1) + "%";
+
+  var varEl = document.getElementById("kpi-var");
+  if (!prev) {
+    varEl.textContent = "—";
+  } else {
+    var pct = ((last.total - prev.total) / prev.total * 100).toFixed(1);
+    varEl.textContent  = (parseFloat(pct) >= 0 ? "+" : "") + pct + "%";
+    varEl.className    = "value " + (parseFloat(pct) >= 0 ? "up" : "down");
+  }
+})();
+
+// ── GRÁFICO SEMANAL ───────────────────────────────────────────────────────────
+(function renderSemanal() {
+  var ctx = document.getElementById("chartSemanal").getContext("2d");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: WEEKS.map(function(w) { return w.label; }),
+      datasets: PRODS.map(function(p) {
+        return {
+          label: p,
+          data: WEEKS.map(function(w) {
+            var arr = w.dailyByProd[p] || [];
+            return arr.reduce(function(s, v) { return s + v; }, 0);
+          }),
+          backgroundColor: COLORS[p],
+          borderRadius: 5,
+          borderSkipped: false
+        };
+      })
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "bottom", labels: { boxWidth: 14, padding: 10 } },
+        tooltip: {
+          callbacks: {
+            label: function(c) {
+              return " " + c.dataset.label + ": " +
+                     c.raw.toLocaleString("es-AR", {maximumFractionDigits:1}) + " kg";
+            }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false } },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          ticks: { callback: function(v) { return v + " kg"; } },
+          grid: { color: "#e2e8f0" }
+        }
+      }
+    }
+  });
+})();
+
+// ── GRÁFICO DIARIO ────────────────────────────────────────────────────────────
+var chartDiario = null;
+
+function renderDiario(weekIdx) {
+  var week = WEEKS[weekIdx];
+  var datasets = PRODS.map(function(p) {
+    return {
+      label: p,
+      data: week.dailyByProd[p] || new Array(6).fill(0),
+      backgroundColor: COLORS[p],
+      borderRadius: 4,
+      borderSkipped: false
+    };
+  });
+
+  if (chartDiario) chartDiario.destroy();
+  var ctx = document.getElementById("chartDiario").getContext("2d");
+  chartDiario = new Chart(ctx, {
+    type: "bar",
+    data: { labels: DIAS, datasets: datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "bottom", labels: { boxWidth: 14, padding: 10 } },
+        tooltip: {
+          callbacks: {
+            label: function(c) {
+              return " " + c.dataset.label + ": " +
+                     c.raw.toLocaleString("es-AR", {maximumFractionDigits:2}) + " kg";
+            }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false } },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          ticks: { callback: function(v) { return v + " kg"; } },
+          grid: { color: "#e2e8f0" }
+        }
+      }
+    }
+  });
+}
+
+(function initSelector() {
+  var sel = document.getElementById("weekSelect");
+  WEEKS.forEach(function(w, i) {
+    var opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = w.label + " (" + w.weekRange + ") — " +
+      w.total.toLocaleString("es-AR", {maximumFractionDigits:1}) + " kg";
+    sel.appendChild(opt);
+  });
+  sel.value = WEEKS.length - 1;
+  renderDiario(WEEKS.length - 1);
+  sel.addEventListener("change", function() { renderDiario(parseInt(sel.value)); });
+})();
+
+// ── TABLA DETALLE ─────────────────────────────────────────────────────────────
+(function renderTable() {
+  var w = WEEKS[WEEKS.length - 1];
+  var totProd = PRODS.reduce(function(s, p) {
+    return s + (w.dailyByProd[p] || []).reduce(function(a, b) { return a + b; }, 0);
+  }, 0);
+
+  var header = "<thead><tr>" +
+    "<th>Producto</th>" +
+    "<th>Lun 11</th><th>Mar 12</th><th>Mié 13</th><th>Jue 14</th><th>Vie 15</th><th>Sáb</th>" +
+    "<th>Total kg</th><th>% mix</th>" +
+    "</tr></thead>";
+
+  var bodyRows = PRODS.map(function(p) {
+    var vals = w.dailyByProd[p] || [];
+    var tot  = vals.reduce(function(s, v) { return s + v; }, 0);
+    return "<tr>" +
+      '<td><span class="dot" style="background:' + COLORS[p] + '"></span>' + p + "</td>" +
+      vals.map(function(v) {
+        return "<td>" + (v > 0 ? v.toFixed(2) : "—") + "</td>";
+      }).join("") +
+      "<td><strong>" + tot.toFixed(2) + "</strong></td>" +
+      "<td>" + (totProd > 0 ? (tot / totProd * 100).toFixed(1) + "%" : "—") + "</td>" +
+    "</tr>";
+  }).join("");
+
+  var totalRow = '<tr class="total-row">' +
+    "<td>TOTAL PRODUCCIÓN</td>" +
+    w.daily.map(function(v) { return "<td>" + (v > 0 ? v.toFixed(2) : "—") + "</td>"; }).join("") +
+    "<td>" + w.total.toFixed(2) + "</td><td>100%</td>" +
+  "</tr>";
+
+  var entradaKgRow = '<tr class="meta-row">' +
+    "<td>Entrada (kg)</td>" +
+    w.entradaKgPerDay.map(function(v) { return "<td>" + (v > 0 ? v : "—") + "</td>"; }).join("") +
+    "<td>" + w.entradaKgPerDay.reduce(function(s,v){return s+v;},0) + "</td><td></td>" +
+  "</tr>";
+
+  var cajasRow = '<tr class="meta-row">' +
+    "<td>Cajas entrada</td>" +
+    w.entradaBandejasPerDay.map(function(v) { return "<td>" + (v > 0 ? v : "—") + "</td>"; }).join("") +
+    "<td><strong>" + w.entradaBandejasPerDay.reduce(function(s,v){return s+v;},0) + "</strong></td><td></td>" +
+  "</tr>";
+
+  document.getElementById("detailTable").innerHTML =
+    header + "<tbody>" + bodyRows + totalRow + entradaKgRow + cajasRow + "</tbody>";
+})();
+</script>
+
+</body>
+</html>
