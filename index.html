@@ -125,7 +125,7 @@
 
 <div class="kpi-grid">
   <div class="card kpi">
-    <div class="label">Semana actual (S20)</div>
+    <div class="label">Semana actual (S21)</div>
     <div class="value" id="kpi-actual">—</div>
     <div class="sub">kg producidos</div>
   </div>
@@ -177,7 +177,7 @@
   <table class="detail-table" id="detailTable"></table>
 </div>
 
-<footer>Datos registrados al 15/05/2026 · Semana actual S21 (18/05): sin producción registrada · Brugali — Ingeniería de Procesos</footer>
+<footer>Actualizado: 19/05/2026 · S21 en curso (solo lunes 18/05) · S20 completa: 826,4 kg · Brugali — Ingeniería de Procesos</footer>
 
 <script>
 // ── DATOS INCRUSTADOS ─────────────────────────────────────────────────────────
@@ -188,22 +188,7 @@
 // Nota: el lote 18052026 (lunes 18/05) tiene entrada=0 → descartado (sin producción aún)
 const WEEKS = [
   {
-    label: "S21", isoWeek: 21, dateRange: "18–22 may", isPartial: true,
-    total: 179.0,
-    daily: [179.0, 0, 0, 0, 0, 0],
-    dailyByProd: {
-      "Tiras":        [41.7, 0, 0, 0, 0, 0],
-      "cortes":       [22,   0, 0, 0, 0, 0],
-      "tiras unidas": [69.8, 0, 0, 0, 0, 0],
-      "cubos":        [45.5, 0, 0, 0, 0, 0],
-      "sin embolsar": [0,    0, 0, 0, 0, 0]
-    },
-    entradaBandejasPerDay: [28, 0, 0, 0, 0, 0],
-    entradaKgPerDay: [420, 0, 0, 0, 0, 0],
-    promedioCajas: 28.0, promedioUso: 42.6, activeDaysCount: 1
-  },
-  {
-    label: "S20", isoWeek: 20, dateRange: "11–16 may", isPartial: false,
+    label: "S20", isoWeek: 20, weekRange: "11–16 may", isPartial: false,
     total: 826.425,
     daily: [140.125, 175.225, 158.425, 94.4, 186.2, 72.05],
     dailyByProd: {
@@ -216,6 +201,21 @@ const WEEKS = [
     entradaBandejasPerDay: [24, 29, 28, 30, 28, 17],
     entradaKgPerDay: [360, 435, 420, 450, 420, 255],
     promedioCajas: 26.0, promedioUso: 35.1, activeDaysCount: 6
+  },
+  {
+    label: "S21", isoWeek: 21, weekRange: "18–22 may", isPartial: true,
+    total: 179.0,
+    daily: [179.0, 0, 0, 0, 0, 0],
+    dailyByProd: {
+      "Tiras":        [41.7, 0, 0, 0, 0, 0],
+      "cortes":       [22,   0, 0, 0, 0, 0],
+      "tiras unidas": [69.8, 0, 0, 0, 0, 0],
+      "cubos":        [45.5, 0, 0, 0, 0, 0],
+      "sin embolsar": [0,    0, 0, 0, 0, 0]
+    },
+    entradaBandejasPerDay: [28, 0, 0, 0, 0, 0],
+    entradaKgPerDay: [420, 0, 0, 0, 0, 0],
+    promedioCajas: 28.0, promedioUso: 42.6, activeDaysCount: 1
   }
 ];
 
