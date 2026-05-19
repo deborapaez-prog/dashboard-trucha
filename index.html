@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ð ProducciÃ³n Trucha â Brugali</title>
+<title>🐟 Producción Trucha — Brugali</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"
         integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi"
         crossorigin="anonymous"></script>
@@ -119,79 +119,76 @@
 <body>
 
 <header>
-  <h1>ð ProducciÃ³n Trucha â Brugali</h1>
-  <span class="badge">ð Actualizado: 18/05/2026</span>
+  <h1>🐟 Producción Trucha — Brugali</h1>
+  <span class="badge">📅 Actualizado: 19/05/2026 </span>
 </header>
 
 <div class="kpi-grid">
   <div class="card kpi">
     <div class="label">Semana actual (S20)</div>
-    <div class="value" id="kpi-actual">â</div>
+    <div class="value" id="kpi-actual">—</div>
     <div class="sub">kg producidos</div>
   </div>
   <div class="card kpi">
     <div class="label">Semana anterior</div>
-    <div class="value" id="kpi-anterior">â</div>
+    <div class="value" id="kpi-anterior">—</div>
     <div class="sub">kg producidos</div>
   </div>
   <div class="card kpi">
-    <div class="label">VariaciÃ³n</div>
-    <div class="value" id="kpi-var">â</div>
+    <div class="label">Variación</div>
+    <div class="value" id="kpi-var">—</div>
     <div class="sub">semana a semana</div>
   </div>
   <div class="card kpi">
     <div class="label">Acumulado total</div>
-    <div class="value" id="kpi-total">â</div>
+    <div class="value" id="kpi-total">—</div>
     <div class="sub">kg acumulados</div>
   </div>
   <div class="card kpi">
-    <div class="label">Prom. cajas/dÃ­a</div>
-    <div class="value" id="kpi-cajas">â</div>
+    <div class="label">Prom. cajas/día</div>
+    <div class="value" id="kpi-cajas">—</div>
     <div class="sub">cajas entrada (S20)</div>
   </div>
   <div class="card kpi">
     <div class="label">% Uso prom. (S20)</div>
-    <div class="value" id="kpi-uso">â</div>
+    <div class="value" id="kpi-uso">—</div>
     <div class="sub">prod / entrada</div>
   </div>
 </div>
 
 <div class="charts-grid">
   <div class="card">
-    <h2>ð EvoluciÃ³n semanal (kg totales)</h2>
+    <h2>📊 Evolución semanal (kg totales)</h2>
     <div class="chart-wrap"><canvas id="chartSemanal"></canvas></div>
   </div>
   <div class="card">
-    <h2>ð¦ ProducciÃ³n diaria por producto</h2>
+    <h2>📦 Producción diaria por producto</h2>
     <div class="selector-row">
       <label>Semana:</label>
       <select id="weekSelect"></select>
     </div>
     <div class="chart-wrap"><canvas id="chartDiario"></canvas></div>
-    <p class="note">L = lunes Â· M = martes Â· X = miÃ©rcoles Â· J = jueves Â· V = viernes Â· S = sÃ¡bado</p>
+    <p class="note">L = lunes · M = martes · X = miércoles · J = jueves · V = viernes · S = sábado</p>
   </div>
 </div>
 
 <div class="card">
-  <h2>ð Detalle por producto â S20 (11/05â15/05/2026) Â· Total: 754.4 kg</h2>
+  <h2>📋 Detalle por producto — S20 (11/05–15/05/2026) · Total: 754.4 kg</h2>
   <table class="detail-table" id="detailTable"></table>
 </div>
 
-<footer>Datos registrados al 15/05/2026 Â· Semana actual S21 (18/05): sin producciÃ³n registrada Â· Brugali â IngenierÃ­a de Procesos</footer>
+<footer>Datos registrados al 15/05/2026 · Semana actual S21 (18/05): sin producción registrada · Brugali — Ingeniería de Procesos</footer>
 
 <script>
-// ââ DATOS INCRUSTADOS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-// Fuente: Google Drive - planilla de producciÃ³n trucha (ID: 1j-hrr20tA_R690mz1sMsPn3ElNRqzdsFb42C8y8lfgE)
+// ── DATOS INCRUSTADOS ─────────────────────────────────────────────────────────
+// Fuente: Google Drive - planilla de producción trucha (ID: 1j-hrr20tA_R690mz1sMsPn3ElNRqzdsFb42C8y8lfgE)
 // Actualizado: 18/05/2026
-// Semana ISO 20 (lunes 11/05 â viernes 15/05)
+// Semana ISO 20 (lunes 11/05 → viernes 15/05)
 // Nota: incluye "sin embolsar" del martes 12/05 (39.175 kg)
-// Nota: el lote 18052026 (lunes 18/05) tiene entrada=0 â descartado (sin producciÃ³n aÃºn)
+// Nota: el lote 18052026 (lunes 18/05) tiene entrada=0 → descartado (sin producción aún)
 const WEEKS = [
   {
-    label: "S20",
-    isoWeek: 20,
-    dateRange: "11–16 may",
-    isPartial: false,
+    label: "S20", isoWeek: 20, dateRange: "11–16 may", isPartial: false,
     total: 826.425,
     daily: [140.125, 175.225, 158.425, 94.4, 186.2, 72.05],
     dailyByProd: {
@@ -201,16 +198,12 @@ const WEEKS = [
       "cubos":        [38.5,   49,     105,    0,     45.5,  17.5],
       "sin embolsar": [0,      39.175, 0,      0,     0,     0]
     },
-    entradaBandejasDia: [24, 29, 28, 30, 28, 17],
-    promedioCajas: 26.0,
-    promedioUso: 35.1,
-    activeDaysCount: 6
+    entradaBandejasPerDay: [24, 29, 28, 30, 28, 17],
+    entradaKgPerDay: [360, 435, 420, 450, 420, 255],
+    promedioCajas: 26.0, promedioUso: 35.1, activeDaysCount: 6
   },
   {
-    label: "S21",
-    isoWeek: 21,
-    dateRange: "18–22 may",
-    isPartial: true,
+    label: "S21", isoWeek: 21, dateRange: "18–22 may", isPartial: true,
     total: 179.0,
     daily: [179.0, 0, 0, 0, 0, 0],
     dailyByProd: {
@@ -220,10 +213,9 @@ const WEEKS = [
       "cubos":        [45.5, 0, 0, 0, 0, 0],
       "sin embolsar": [0,    0, 0, 0, 0, 0]
     },
-    entradaBandejasDia: [28, 0, 0, 0, 0, 0],
-    promedioCajas: 28.0,
-    promedioUso: 42.6,
-    activeDaysCount: 1
+    entradaBandejasPerDay: [28, 0, 0, 0, 0, 0],
+    entradaKgPerDay: [420, 0, 0, 0, 0, 0],
+    promedioCajas: 28.0, promedioUso: 42.6, activeDaysCount: 1
   }
 ];
 
@@ -237,7 +229,7 @@ const COLORS = {
 const PRODS = ["Tiras", "cortes", "tiras unidas", "cubos", "sin embolsar"];
 const DIAS  = ["L","M","X","J","V","S"];
 
-// ââ KPIs ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── KPIs ──────────────────────────────────────────────────────────────────────
 (function renderKPIs() {
   const last = WEEKS[WEEKS.length - 1];
   const prev = WEEKS.length > 1 ? WEEKS[WEEKS.length - 2] : null;
@@ -254,7 +246,7 @@ const DIAS  = ["L","M","X","J","V","S"];
 
   var varEl = document.getElementById("kpi-var");
   if (!prev) {
-    varEl.textContent = "â";
+    varEl.textContent = "—";
   } else {
     var pct = ((last.total - prev.total) / prev.total * 100).toFixed(1);
     varEl.textContent  = (parseFloat(pct) >= 0 ? "+" : "") + pct + "%";
@@ -262,7 +254,7 @@ const DIAS  = ["L","M","X","J","V","S"];
   }
 })();
 
-// ââ GRÃFICO SEMANAL âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── GRÁFICO SEMANAL ───────────────────────────────────────────────────────────
 (function renderSemanal() {
   var ctx = document.getElementById("chartSemanal").getContext("2d");
   new Chart(ctx, {
@@ -309,7 +301,7 @@ const DIAS  = ["L","M","X","J","V","S"];
   });
 })();
 
-// ââ GRÃFICO DIARIO ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── GRÁFICO DIARIO ────────────────────────────────────────────────────────────
 var chartDiario = null;
 
 function renderDiario(weekIdx) {
@@ -361,7 +353,7 @@ function renderDiario(weekIdx) {
   WEEKS.forEach(function(w, i) {
     var opt = document.createElement("option");
     opt.value = i;
-    opt.textContent = w.label + " (" + w.weekRange + ") â " +
+    opt.textContent = w.label + " (" + w.weekRange + ") — " +
       w.total.toLocaleString("es-AR", {maximumFractionDigits:1}) + " kg";
     sel.appendChild(opt);
   });
@@ -370,7 +362,7 @@ function renderDiario(weekIdx) {
   sel.addEventListener("change", function() { renderDiario(parseInt(sel.value)); });
 })();
 
-// ââ TABLA DETALLE âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── TABLA DETALLE ─────────────────────────────────────────────────────────────
 (function renderTable() {
   var w = WEEKS[WEEKS.length - 1];
   var totProd = PRODS.reduce(function(s, p) {
@@ -379,7 +371,7 @@ function renderDiario(weekIdx) {
 
   var header = "<thead><tr>" +
     "<th>Producto</th>" +
-    "<th>Lun 11</th><th>Mar 12</th><th>MiÃ© 13</th><th>Jue 14</th><th>Vie 15</th><th>SÃ¡b</th>" +
+    "<th>Lun 11</th><th>Mar 12</th><th>Mié 13</th><th>Jue 14</th><th>Vie 15</th><th>Sáb</th>" +
     "<th>Total kg</th><th>% mix</th>" +
     "</tr></thead>";
 
@@ -389,28 +381,28 @@ function renderDiario(weekIdx) {
     return "<tr>" +
       '<td><span class="dot" style="background:' + COLORS[p] + '"></span>' + p + "</td>" +
       vals.map(function(v) {
-        return "<td>" + (v > 0 ? v.toFixed(2) : "â") + "</td>";
+        return "<td>" + (v > 0 ? v.toFixed(2) : "—") + "</td>";
       }).join("") +
       "<td><strong>" + tot.toFixed(2) + "</strong></td>" +
-      "<td>" + (totProd > 0 ? (tot / totProd * 100).toFixed(1) + "%" : "â") + "</td>" +
+      "<td>" + (totProd > 0 ? (tot / totProd * 100).toFixed(1) + "%" : "—") + "</td>" +
     "</tr>";
   }).join("");
 
   var totalRow = '<tr class="total-row">' +
-    "<td>TOTAL PRODUCCIÃN</td>" +
-    w.daily.map(function(v) { return "<td>" + (v > 0 ? v.toFixed(2) : "â") + "</td>"; }).join("") +
+    "<td>TOTAL PRODUCCIÓN</td>" +
+    w.daily.map(function(v) { return "<td>" + (v > 0 ? v.toFixed(2) : "—") + "</td>"; }).join("") +
     "<td>" + w.total.toFixed(2) + "</td><td>100%</td>" +
   "</tr>";
 
   var entradaKgRow = '<tr class="meta-row">' +
     "<td>Entrada (kg)</td>" +
-    w.entradaKgPerDay.map(function(v) { return "<td>" + (v > 0 ? v : "â") + "</td>"; }).join("") +
+    w.entradaKgPerDay.map(function(v) { return "<td>" + (v > 0 ? v : "—") + "</td>"; }).join("") +
     "<td>" + w.entradaKgPerDay.reduce(function(s,v){return s+v;},0) + "</td><td></td>" +
   "</tr>";
 
   var cajasRow = '<tr class="meta-row">' +
     "<td>Cajas entrada</td>" +
-    w.entradaBandejasPerDay.map(function(v) { return "<td>" + (v > 0 ? v : "â") + "</td>"; }).join("") +
+    w.entradaBandejasPerDay.map(function(v) { return "<td>" + (v > 0 ? v : "—") + "</td>"; }).join("") +
     "<td><strong>" + w.entradaBandejasPerDay.reduce(function(s,v){return s+v;},0) + "</strong></td><td></td>" +
   "</tr>";
 
