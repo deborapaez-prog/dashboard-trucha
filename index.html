@@ -147,12 +147,14 @@
   <div class="card kpi">
     <div class="label">Prom. cajas/día</div>
     <div class="value" id="kpi-cajas">—</div>
-    <div class="sub">cajas entrada (S20)</div>
+    <div class="sub">sem. actual</div>
+    <div class="sub" id="kpi-cajas-hist" style="margin-top:2px;">—</div>
   </div>
   <div class="card kpi">
-    <div class="label">% Uso prom. (S20)</div>
+    <div class="label">% Uso prom.</div>
     <div class="value" id="kpi-uso">—</div>
-    <div class="sub">prod / entrada</div>
+    <div class="sub">sem. actual</div>
+    <div class="sub" id="kpi-uso-hist" style="margin-top:2px;">—</div>
   </div>
 </div>
 
@@ -252,6 +254,11 @@ const DIAS  = ["L","M","X","J","V","S"];
     varEl.textContent  = (parseFloat(pct) >= 0 ? "+" : "") + pct + "%";
     varEl.className    = "value " + (parseFloat(pct) >= 0 ? "up" : "down");
   }
+  var totalDias = WEEKS.reduce(function(s,w){ return s + w.activeDaysCount; }, 0);
+  var histCajas = totalDias > 0 ? WEEKS.reduce(function(s,w){ return s + w.promedioCajas * w.activeDaysCount; }, 0) / totalDias : 0;
+  var histUso = totalDias > 0 ? WEEKS.reduce(function(s,w){ return s + w.promedioUso * w.activeDaysCount; }, 0) / totalDias : 0;
+  document.getElementById("kpi-cajas-hist").textContent = "histórico: " + histCajas.toFixed(1) + " cajas/día";
+  document.getElementById("kpi-uso-hist").textContent = "histórico: " + histUso.toFixed(1) + "%";
 })();
 
 // ── GRÁFICO SEMANAL ───────────────────────────────────────────────────────────
