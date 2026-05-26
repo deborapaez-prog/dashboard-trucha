@@ -77,45 +77,45 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 
 <header>
   <h1>🐟 Producción Trucha — Brugali</h1>
-  <span class="badge">📅 Actualizado: 21/05/2026 — auto</span>
+  <span class="badge">📅 Actualizado: 26/05/2026 — auto</span>
 </header>
 
 <main>
 
   <div class="alerta">
-    ⚠️ <strong>Semana actual (S21) es parcial</strong> — 3 días registrados (lun 18/05, mar 19/05 y mié 20/05). La comparación con S20 no refleja una semana completa.
+    ⚠️ <strong>Semana actual (S22) es parcial</strong> — 1 día registrado (lun 25/05). La comparación con S21 no refleja una semana completa.
   </div>
 
   <div class="kpi-grid">
     <div class="kpi-card">
-      <div class="lbl">Semana actual (S21)</div>
-      <div class="val">533,6 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">3 días · semana parcial</div>
+      <div class="lbl">Semana actual (S22)</div>
+      <div class="val">140,3 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="sub">1 día · semana parcial</div>
     </div>
     <div class="kpi-card">
-      <div class="lbl">Semana anterior (S20)</div>
-      <div class="val" style="color:#4a5568">931,2 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">6 días activos (lun–sáb)</div>
+      <div class="lbl">Semana anterior (S21)</div>
+      <div class="val" style="color:#4a5568">915,5 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="sub">5 días activos (lun–vie)</div>
     </div>
-    <div class="kpi-card neg">
+    <div class="kpi-card nd">
       <div class="lbl">Variación semanal</div>
-      <div class="val">−42,7%</div>
-      <div class="sub">S21 aún en curso</div>
+      <div class="val">S22 parcial</div>
+      <div class="sub">comparación no disponible</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">Acumulado total</div>
-      <div class="val" style="color:#553c9a">1.465 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">2 semanas registradas</div>
+      <div class="val" style="color:#553c9a">1.987 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="sub">3 semanas registradas</div>
     </div>
     <div class="kpi-card">
-      <div class="lbl">Prom. cajas/día (S21)</div>
-      <div class="val">27,3 <span style="font-size:.9rem;color:#a0aec0">cajas</span></div>
-      <div class="sub">prom. % uso: 43,4%</div>
+      <div class="lbl">Prom. cajas/día (S22)</div>
+      <div class="val">21,0 <span style="font-size:.9rem;color:#a0aec0">cajas</span></div>
+      <div class="sub">prom. % uso: 44,5%</div>
     </div>
     <div class="kpi-card">
-      <div class="lbl">Prom. % uso (S20)</div>
-      <div class="val">39,0 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
-      <div class="sub">ref: 26 cajas/día</div>
+      <div class="lbl">Prom. % uso (S21)</div>
+      <div class="val">44,3 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
+      <div class="sub">ref: 27,6 cajas/día</div>
     </div>
   </div>
 
@@ -133,7 +133,8 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
       📅 Producción diaria por producto
       <select id="selDiario">
         <option value="0">S20 — 11 al 16/05</option>
-        <option value="1" selected>S21 — 18–20/05 (parcial)</option>
+        <option value="1">S21 — 18–22/05</option>
+        <option value="2" selected>S22 — 25/05 (parcial)</option>
       </select>
     </h2>
     <div class="chart-wrap">
@@ -148,7 +149,8 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
       🗂 Detalle diario por producto (kg)
       <select id="selTabla">
         <option value="0">S20 — 11 al 16/05</option>
-        <option value="1" selected>S21 — 18–20/05 (parcial)</option>
+        <option value="1">S21 — 18–22/05</option>
+        <option value="2" selected>S22 — 25/05 (parcial)</option>
       </select>
     </h2>
     <div class="table-wrap">
@@ -162,7 +164,7 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 
 <script>
 // ──────────────────────────────────────────────────────────────────────────────
-// DATOS INCRUSTADOS — actualizados el 21/05/2026 (con miércoles 20/05 incluido)
+// DATOS INCRUSTADOS — actualizados el 26/05/2026 (S22 parcial: solo lun 25/05)
 // ──────────────────────────────────────────────────────────────────────────────
 const WEEKS = [
   {
@@ -189,22 +191,42 @@ const WEEKS = [
   {
     label: "S21",
     isoWeek: 21,
-    dateRange: "18–24 may",
-    isPartial: true,
-    total: 533.575,
+    dateRange: "18–22 may",
+    isPartial: false,
+    total: 915.525,
     // índices: 0=L 1=M 2=M 3=J 4=V 5=S
-    daily: [179.0, 183.7, 170.875, 0, 0, 0],
+    daily: [188.1, 185.8, 178.575, 180.275, 182.775, 0],
     dailyByProd: {
-      "Tiras":        [41.7,  34.3,   47.775, 0, 0, 0],
-      "cortes":       [22,    10,     16,     0, 0, 0],
-      "tiras unidas": [69.8,  53.9,   68.6,   0, 0, 0],
-      "cubos":        [45.5,  10.5,   38.5,   0, 0, 0],
-      "sin embolsar": [0,     75,     0,      0, 0, 0]
+      "Tiras":        [41.7,  34.3,   47.775, 39.2,   45.325, 0],
+      "cortes":       [22,    10,     16,     12,     19.5,   0],
+      "tiras unidas": [69.8,  53.9,   68.6,   39.2,   61.25,  0],
+      "cubos":        [54.6,  12.6,   46.2,   56.7,   56.7,   0],
+      "sin embolsar": [0,     75,     0,      33.175, 0,      0]
     },
-    entradaBandejasDia: [28, 28, 26, 0, 0, 0],
-    promedioCajas: 27.3,
-    promedioUso: 43.4,
-    activeDaysCount: 3
+    entradaBandejasDia: [28, 28, 26, 28, 28, 0],
+    promedioCajas: 27.6,
+    promedioUso: 44.25,
+    activeDaysCount: 5
+  },
+  {
+    label: "S22",
+    isoWeek: 22,
+    dateRange: "25–31 may",
+    isPartial: true,
+    total: 140.25,
+    // índices: 0=L 1=M 2=M 3=J 4=V 5=S
+    daily: [140.25, 0, 0, 0, 0, 0],
+    dailyByProd: {
+      "Tiras":        [36.75, 0, 0, 0, 0, 0],
+      "cortes":       [16,    0, 0, 0, 0, 0],
+      "tiras unidas": [53.9,  0, 0, 0, 0, 0],
+      "cubos":        [33.6,  0, 0, 0, 0, 0],
+      "sin embolsar": [0,     0, 0, 0, 0, 0]
+    },
+    entradaBandejasDia: [21, 0, 0, 0, 0, 0],
+    promedioCajas: 21.0,
+    promedioUso: 44.52,
+    activeDaysCount: 1
   }
 ];
 
@@ -281,7 +303,7 @@ function initDiario(wi) {
 }
 
 document.getElementById("selDiario").addEventListener("change", function() { initDiario(+this.value); });
-initDiario(1);
+initDiario(2);
 
 // ── Tabla detalle ─────────────────────────────────────────────────────────────
 function buildTabla(wi) {
@@ -317,7 +339,7 @@ function buildTabla(wi) {
 }
 
 document.getElementById("selTabla").addEventListener("change", function() { buildTabla(+this.value); });
-buildTabla(1);
+buildTabla(2);
 </script>
 </body>
 </html>
