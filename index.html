@@ -3,365 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🐟 Producción Trucha — Brugali</title>
+<title>Produccion Trucha - Brugali</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #2d3748; min-height: 100vh; }
-header {
-  background: linear-gradient(135deg, #2b6cb0, #3182ce);
-  color: white; padding: 20px 28px;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-header h1 { font-size: 1.45rem; font-weight: 700; }
-.badge {
-  background: rgba(255,255,255,0.22); border-radius: 20px;
-  padding: 5px 14px; font-size: 0.83rem; font-weight: 600;
-}
-main { max-width: 1100px; margin: 0 auto; padding: 24px 18px; }
-
-/* alerta semana parcial */
-.alerta {
-  background: #fffbeb; border: 1px solid #f6ad55; border-left: 4px solid #dd6b20;
-  border-radius: 8px; padding: 10px 16px; margin-bottom: 22px;
-  font-size: 0.85rem; color: #7b5e1a;
-}
-
-/* KPIs */
-.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 14px; margin-bottom: 24px; }
-.kpi-card {
-  background: white; border-radius: 12px; padding: 18px 16px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.08); text-align: center;
-}
-.kpi-card .lbl { font-size: 0.73rem; color: #718096; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
-.kpi-card .val { font-size: 1.75rem; font-weight: 700; color: #2b6cb0; line-height: 1; }
-.kpi-card .sub { font-size: 0.75rem; color: #a0aec0; margin-top: 5px; }
-.neg .val { color: #c53030; }
-.nd  .val { color: #a0aec0; font-size: 1.1rem; margin-top: 6px; }
-
-/* cards */
-.card {
-  background: white; border-radius: 12px; padding: 22px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.08); margin-bottom: 22px;
-}
-.card h2 { font-size: 0.95rem; color: #4a5568; margin-bottom: 16px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.chart-wrap { position: relative; height: 260px; }
-
-/* selector */
-select {
-  border: 1px solid #e2e8f0; border-radius: 7px; padding: 5px 10px;
-  font-size: 0.83rem; background: #f7fafc; color: #2d3748; cursor: pointer;
-}
-
-/* tabla */
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-thead th {
-  background: #edf2f7; padding: 9px 10px; text-align: right;
-  font-weight: 600; color: #4a5568; border-bottom: 2px solid #e2e8f0;
-}
-thead th:first-child { text-align: left; }
-tbody td { padding: 8px 10px; text-align: right; border-bottom: 1px solid #f0f4f8; }
-tbody td:first-child { text-align: left; font-weight: 500; }
-.row-total td { background: #f7fafc; font-weight: 700; border-top: 2px solid #e2e8f0; }
-.row-entrada td { background: #ebf8ff; color: #2b6cb0; font-style: italic; }
-.cero { color: #cbd5e0; }
-.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
-
-footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0 28px; }
+body { font-family: sans-serif; background: #f0f4f8; color: #2d3748; }
+header { background: linear-gradient(135deg,#2b6cb0,#3182ce); color:white; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; }
+.badge { background: rgba(255,255,255,0.22); border-radius:20px; padding:5px 14px; font-size:0.83rem; }
+main { max-width:1100px; margin:0 auto; padding:24px 18px; }
+.alerta { background:#fffbeb; border:1px solid #f6ad55; border-left:4px solid #dd6b20; border-radius:8px; padding:10px 16px; margin-bottom:22px; font-size:0.85rem; color:#7b5e1a; }
+.kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(165px,1fr)); gap:14px; margin-bottom:24px; }
+.kpi-card { background:white; border-radius:12px; padding:18px 16px; box-shadow:0 1px 6px rgba(0,0,0,0.08); text-align:center; }
+.kpi-card .lbl { font-size:0.73rem; color:#718096; text-transform:uppercase; margin-bottom:8px; }
+.kpi-card .val { font-size:1.75rem; font-weight:700; color:#2b6cb0; }
+.kpi-card .sub { font-size:0.75rem; color:#a0aec0; margin-top:5px; }
+.neg .val { color:#c53030; }
+.card { background:white; border-radius:12px; padding:22px; box-shadow:0 1px 6px rgba(0,0,0,0.08); margin-bottom:22px; }
+.card h2 { font-size:0.95rem; color:#4a5568; margin-bottom:16px; font-weight:600; display:flex; align-items:center; justify-content:space-between; }
+.chart-wrap { position:relative; height:260px; }
+select { border:1px solid #e2e8f0; border-radius:7px; padding:5px 10px; font-size:0.83rem; background:#f7fafc; }
+table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+thead th { background:#edf2f7; padding:9px 10px; text-align:right; font-weight:600; color:#4a5568; border-bottom:2px solid #e2e8f0; }
+thead th:first-child { text-align:left; }
+tbody td { padding:8px 10px; text-align:right; border-bottom:1px solid #f0f4f8; }
+tbody td:first-child { text-align:left; font-weight:500; }
+.row-total td { background:#f7fafc; font-weight:700; border-top:2px solid #e2e8f0; }
+.row-entrada td { background:#ebf8ff; color:#2b6cb0; font-style:italic; }
+.cero { color:#cbd5e0; }
+.dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px; }
+footer { text-align:center; color:#a0aec0; font-size:0.76rem; padding:20px 0 28px; }
 </style>
 </head>
 <body>
-
 <header>
-  <h1>🐟 Producción Trucha — Brugali</h1>
-  <span class="badge">📅 Actualizado: 02/06/2026 — S23 iniciada</span>
+  <h1>Produccion Trucha - Brugali</h1>
+  <span class="badge">Actualizado: 03/06/2026 - auto</span>
 </header>
-
 <main>
-
   <div class="alerta">
-    📅 <strong>Semana actual (S23) en curso</strong> desde lun 01/06 — sin registros aún (hoy mar 02/06). S22 ya está completa (4 días: lun, mié, jue, vie).
+    <strong>Semana S23 en curso</strong> - lun 01/06: 161 kg producidos. mar 02/06: sin produccion. mie 03/06: entrada 390 kg (26 bandejas) sin productos aun. Uso S23: 19,5% (161 kg de 825 kg entrada). S22 completa (4 dias).
   </div>
-
   <div class="kpi-grid">
-    <div class="kpi-card">
-      <div class="lbl">Semana actual (S23)</div>
-      <div class="val">161,0 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">1 día · semana parcial</div>
-    </div>
-    <div class="kpi-card">
-      <div class="lbl">Semana anterior (S22)</div>
-      <div class="val" style="color:#4a5568">650,0 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">4 días activos (lun, mié, jue, vie)</div>
-    </div>
-    <div class="kpi-card nd">
-      <div class="lbl">Variación S23 vs S22</div>
-      <div class="val">S23 parcial</div>
-      <div class="sub">comparación no disponible</div>
-    </div>
-    <div class="kpi-card">
-      <div class="lbl">Acumulado total</div>
-      <div class="val" style="color:#553c9a">2.658 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">4 semanas registradas</div>
-    </div>
-    <div class="kpi-card">
-      <div class="lbl">Prom. % uso (S23)</div>
-      <div class="val">37,0 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
-      <div class="sub">semana actual · 29 cajas/día</div>
-    </div>
-    <div class="kpi-card">
-      <div class="lbl">Prom. % uso general</div>
-      <div class="val">40,4 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
-      <div class="sub">promedio S20 + S21 + S22 + S23</div>
-    </div>
+    <div class="kpi-card"><div class="lbl">Semana actual S23 (parcial)</div><div class="val">161,0 <span style="font-size:.9rem;color:#a0aec0">kg</span></div><div class="sub">1 dia c/prod - mie 03/06 entrada s/prod</div></div>
+    <div class="kpi-card"><div class="lbl">Semana anterior S22</div><div class="val" style="color:#4a5568">650,0 <span style="font-size:.9rem;color:#a0aec0">kg</span></div><div class="sub">4 dias activos</div></div>
+    <div class="kpi-card neg"><div class="lbl">Variacion S23 vs S22</div><div class="val">-75,2%</div><div class="sub">S23 parcial (1 dia vs 4)</div></div>
+    <div class="kpi-card"><div class="lbl">Acumulado total</div><div class="val" style="color:#553c9a">2.658 <span style="font-size:.9rem;color:#a0aec0">kg</span></div><div class="sub">4 semanas registradas</div></div>
+    <div class="kpi-card"><div class="lbl">% uso S23</div><div class="val">19,5 <span style="font-size:.9rem;color:#a0aec0">%</span></div><div class="sub">27,5 cajas/dia - 825 kg entrada</div></div>
+    <div class="kpi-card"><div class="lbl">% uso general</div><div class="val">36,2 <span style="font-size:.9rem;color:#a0aec0">%</span></div><div class="sub">prom S20+S21+S22+S23</div></div>
   </div>
-
-  <!-- Gráfico semanal -->
-  <div class="card">
-    <h2>📊 Evolución semanal — kg producidos totales</h2>
-    <div class="chart-wrap">
-      <canvas id="chartSemanal"></canvas>
-    </div>
-  </div>
-
-  <!-- Gráfico diario apilado -->
-  <div class="card">
-    <h2>
-      📅 Producción diaria por producto
-      <select id="selDiario">
-        <option value="0">S20 — 11 al 16/05</option>
-        <option value="1">S21 — 18–22/05</option>
-        <option value="2">S22 — 25–29/05</option>
-        <option value="3" selected>S23 — 01–05/06 (parcial)</option>
-      </select>
-    </h2>
-    <div class="chart-wrap">
-      <canvas id="chartDiario"></canvas>
-    </div>
-    <div style="font-size:0.75rem;color:#a0aec0;margin-top:10px;">L = lunes · M = martes · M = miércoles · J = jueves · V = viernes · S = sábado</div>
-  </div>
-
-  <!-- Tabla detalle diario -->
-  <div class="card">
-    <h2>
-      🗂 Detalle diario por producto (kg)
-      <select id="selTabla">
-        <option value="0">S20 — 11 al 16/05</option>
-        <option value="1">S21 — 18–22/05</option>
-        <option value="2">S22 — 25–29/05</option>
-        <option value="3" selected>S23 — 01–05/06 (parcial)</option>
-      </select>
-    </h2>
-    <div class="table-wrap">
-      <table id="tablaDetalle"></table>
-    </div>
-  </div>
-
+  <div class="card"><h2>Evolucion semanal - kg producidos</h2><div class="chart-wrap"><canvas id="chartSemanal"></canvas></div></div>
+  <div class="card"><h2>Produccion diaria por producto <select id="selDiario"><option value="0">S20 - 11-16/05</option><option value="1">S21 - 18-22/05</option><option value="2">S22 - 25-29/05</option><option value="3" selected>S23 - 01-05/06 (parcial)</option></select></h2><div class="chart-wrap"><canvas id="chartDiario"></canvas></div></div>
+  <div class="card"><h2>Detalle diario (kg) <select id="selTabla"><option value="0">S20</option><option value="1">S21</option><option value="2">S22</option><option value="3" selected>S23 (parcial)</option></select></h2><div style="overflow-x:auto"><table id="tablaDetalle"></table></div></div>
 </main>
-
-<footer>Brugali — Ingeniería de Procesos · Cocina Fría · Dashboard generado automáticamente</footer>
-
+<footer>Brugali - Ingenieria de Procesos - Cocina Fria - Dashboard automatico</footer>
 <script>
-// ──────────────────────────────────────────────────────────────────────────────
-// DATOS INCRUSTADOS — actualizados el 02/06/2026 (S23 parcial: lun 01/06)
-// ──────────────────────────────────────────────────────────────────────────────
-const WEEKS = [
-  {
-    label: "S20",
-    isoWeek: 20,
-    dateRange: "11–16 may",
-    isPartial: false,
-    total: 931.225,
-    // índices: 0=L 1=M 2=M 3=J 4=V 5=S
-    daily: [140.125, 175.225, 158.425, 199.2, 186.2, 72.05],
-    dailyByProd: {
-      "Tiras":        [35.525, 31.85,  15.925, 29.4,  44.1,  19.6],
-      "cortes":       [22,     16,     13,     16,    28,    8],
-      "tiras unidas": [44.1,   39.2,   24.5,   49,    68.6,  26.95],
-      "cubos":        [38.5,   49,     105,    0,     45.5,  17.5],
-      "sin embolsar": [0,      39.175, 0,      104.8, 0,     0]
-    },
-    // entradaKg / 15 = bandejas
-    entradaBandejasDia: [24, 29, 28, 30, 28, 17],
-    promedioCajas: 26.0,
-    promedioUso: 39.0,
-    activeDaysCount: 6
-  },
-  {
-    label: "S21",
-    isoWeek: 21,
-    dateRange: "18–22 may",
-    isPartial: false,
-    total: 915.525,
-    // índices: 0=L 1=M 2=M 3=J 4=V 5=S
-    daily: [188.1, 185.8, 178.575, 180.275, 182.775, 0],
-    dailyByProd: {
-      "Tiras":        [41.7,  34.3,   47.775, 39.2,   45.325, 0],
-      "cortes":       [22,    10,     16,     12,     19.5,   0],
-      "tiras unidas": [69.8,  53.9,   68.6,   39.2,   61.25,  0],
-      "cubos":        [54.6,  12.6,   46.2,   56.7,   56.7,   0],
-      "sin embolsar": [0,     75,     0,      33.175, 0,      0]
-    },
-    entradaBandejasDia: [28, 28, 26, 28, 28, 0],
-    promedioCajas: 27.6,
-    promedioUso: 44.25,
-    activeDaysCount: 5
-  },
-  {
-    label: "S22",
-    isoWeek: 22,
-    dateRange: "25–29 may",
-    isPartial: false,
-    total: 650.0,
-    // índices: 0=L 1=M 2=M 3=J 4=V 5=S
-    daily: [140.25, 0, 174.9, 159.8, 175.05, 0],
-    dailyByProd: {
-      "Tiras":        [36.75, 0, 33.1,  33.7,  26.95, 0],
-      "cortes":       [16,    0, 22.0,  12.0,  20.0,  0],
-      "tiras unidas": [53.9,  0, 44.1,  39.2,  66.15, 0],
-      "cubos":        [33.6,  0, 62.0,  39.9,  61.95, 0],
-      "sin embolsar": [0,     0, 13.7,  35.0,  0,     0]
-    },
-    entradaBandejasDia: [21, 0, 28, 28, 28, 0],
-    promedioCajas: 26.25,
-    promedioUso: 41.47,
-    activeDaysCount: 4
-  },
-  {
-    label: "S23",
-    isoWeek: 23,
-    dateRange: "01–05 jun",
-    isPartial: true,
-    total: 161.0,
-    // índices: 0=L 1=M 2=M 3=J 4=V 5=S
-    daily: [161.0, 0, 0, 0, 0, 0],
-    dailyByProd: {
-      "Tiras":        [35.525, 0, 0, 0, 0, 0],
-      "cortes":       [14,     0, 0, 0, 0, 0],
-      "tiras unidas": [37.975, 0, 0, 0, 0, 0],
-      "cubos":        [73.5,   0, 0, 0, 0, 0],
-      "sin embolsar": [0,      0, 0, 0, 0, 0]
-    },
-    entradaBandejasDia: [29, 0, 0, 0, 0, 0],
-    promedioCajas: 29.0,
-    promedioUso: 37.01,
-    activeDaysCount: 1
-  }
-];
-
-const PRODUCTOS = ["Tiras", "cortes", "tiras unidas", "cubos", "sin embolsar"];
-const COLORES = {
-  "Tiras":        "#4299e1",
-  "cortes":       "#68d391",
-  "tiras unidas": "#f6ad55",
-  "cubos":        "#fc8181",
-  "sin embolsar": "#b794f4"
-};
-const DIAS = ["L", "M", "M", "J", "V", "S"];
-
-// ── Gráfico 1: barras semanales ───────────────────────────────────────────────
-new Chart(document.getElementById("chartSemanal").getContext("2d"), {
-  type: "bar",
-  data: {
-    labels: WEEKS.map(w => w.label + (w.isPartial ? "*" : "")),
-    datasets: [{
-      label: "kg producidos",
-      data: WEEKS.map(w => w.total),
-      backgroundColor: WEEKS.map(w => w.isPartial ? "#90cdf4" : "#2b6cb0"),
-      borderRadius: 7,
-      borderSkipped: false
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: ctx => " " + ctx.parsed.y.toFixed(1) + " kg" + (WEEKS[ctx.dataIndex].isPartial ? " (parcial)" : "")
-        }
-      }
-    },
-    scales: {
-      y: { beginAtZero: true, grid: { color: "#edf2f7" }, ticks: { callback: v => v + " kg" } },
-      x: { grid: { display: false } }
-    }
-  }
-});
-
-// ── Gráfico 2: barras apiladas diarias ────────────────────────────────────────
-let chartDiario;
-
-function buildDiarioDatasets(wi) {
-  return PRODUCTOS.map(p => ({
-    label: p,
-    data: WEEKS[wi].dailyByProd[p],
-    backgroundColor: COLORES[p],
-    borderRadius: 4,
-    borderSkipped: false
-  }));
-}
-
-function initDiario(wi) {
-  if (chartDiario) chartDiario.destroy();
-  chartDiario = new Chart(document.getElementById("chartDiario").getContext("2d"), {
-    type: "bar",
-    data: { labels: DIAS, datasets: buildDiarioDatasets(wi) },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { position: "bottom", labels: { usePointStyle: true, padding: 14, font: { size: 11 } } },
-        tooltip: { callbacks: { label: ctx => " " + ctx.dataset.label + ": " + ctx.parsed.y.toFixed(2) + " kg" } }
-      },
-      scales: {
-        x: { stacked: true, grid: { display: false } },
-        y: { stacked: true, beginAtZero: true, grid: { color: "#edf2f7" }, ticks: { callback: v => v + " kg" } }
-      }
-    }
-  });
-}
-
-document.getElementById("selDiario").addEventListener("change", function() { initDiario(+this.value); });
-initDiario(3);
-
-// ── Tabla detalle ─────────────────────────────────────────────────────────────
-function buildTabla(wi) {
-  const w = WEEKS[wi];
-  const t = document.getElementById("tablaDetalle");
-  let h = "<thead><tr><th>Producto</th>";
-  DIAS.forEach(d => { h += `<th>${d}</th>`; });
-  h += "<th>Total</th></tr></thead><tbody>";
-
-  PRODUCTOS.forEach(p => {
-    const vals = w.dailyByProd[p];
-    const tot = vals.reduce((a, b) => a + b, 0);
-    if (tot === 0) return; // ocultar filas vacías para claridad
-    h += `<tr><td><span class="dot" style="background:${COLORES[p]}"></span>${p}</td>`;
-    vals.forEach(v => { h += v > 0 ? `<td>${v.toFixed(2)}</td>` : `<td class="cero">—</td>`; });
-    h += `<td><strong>${tot.toFixed(2)}</strong></td></tr>`;
-  });
-
-  // fila totales
-  h += `<tr class="row-total"><td>TOTAL</td>`;
-  w.daily.forEach(v => { h += v > 0 ? `<td>${v.toFixed(2)}</td>` : `<td class="cero">—</td>`; });
-  h += `<td>${w.total.toFixed(2)}</td></tr>`;
-
-  // fila entrada en bandejas
-  const eb = w.entradaBandejasDia;
-  const totEB = eb.reduce((a,b)=>a+b,0);
-  h += `<tr class="row-entrada"><td>Entrada (bandejas)</td>`;
-  eb.forEach(v => { h += v > 0 ? `<td>${v}</td>` : `<td class="cero">—</td>`; });
-  h += `<td>${totEB > 0 ? totEB : "—"}</td></tr>`;
-
-  h += "</tbody>";
-  t.innerHTML = h;
-}
-
-document.getElementById("selTabla").addEventListener("change", function() { buildTabla(+this.value); });
-buildTabla(3);
+const WEEKS=[{label:"S20",isoWeek:20,dateRange:"11-16 may",isPartial:false,total:931.225,daily:[140.125,175.225,158.425,199.2,186.2,72.05],dailyByProd:{"Tiras":[35.525,31.85,15.925,29.4,44.1,19.6],"cortes":[22,16,13,16,28,8],"tiras unidas":[44.1,39.2,24.5,49,68.6,26.95],"cubos":[38.5,49,105,0,45.5,17.5],"sin embolsar":[0,39.175,0,104.8,0,0]},entradaBandejasDia:[24,29,28,30,28,17],promedioCajas:26.0,promedioUso:39.0,activeDaysCount:6},{label:"S21",isoWeek:21,dateRange:"18-22 may",isPartial:false,total:915.525,daily:[188.1,185.8,178.575,180.275,182.775,0],dailyByProd:{"Tiras":[41.7,34.3,47.775,39.2,45.325,0],"cortes":[22,10,16,12,19.5,0],"tiras unidas":[69.8,53.9,68.6,39.2,61.25,0],"cubos":[54.6,12.6,46.2,56.7,56.7,0],"sin embolsar":[0,75,0,33.175,0,0]},entradaBandejasDia:[28,28,26,28,28,0],promedioCajas:27.6,promedioUso:44.25,activeDaysCount:5},{label:"S22",isoWeek:22,dateRange:"25-29 may",isPartial:false,total:650.0,daily:[140.25,0,174.9,159.8,175.05,0],dailyByProd:{"Tiras":[36.75,0,33.1,33.7,26.95,0],"cortes":[16,0,22.0,12.0,20.0,0],"tiras unidas":[53.9,0,44.1,39.2,66.15,0],"cubos":[33.6,0,62.0,39.9,61.95,0],"sin embolsar":[0,0,13.7,35.0,0,0]},entradaBandejasDia:[21,0,28,28,28,0],promedioCajas:26.25,promedioUso:41.47,activeDaysCount:4},{label:"S23",isoWeek:23,dateRange:"01-05 jun",isPartial:true,total:161.0,daily:[161.0,0,0,0,0,0],dailyByProd:{"Tiras":[35.525,0,0,0,0,0],"cortes":[14,0,0,0,0,0],"tiras unidas":[37.975,0,0,0,0,0],"cubos":[73.5,0,0,0,0,0],"sin embolsar":[0,0,0,0,0,0]},entradaBandejasDia:[29,0,26,0,0,0],promedioCajas:27.5,promedioUso:19.52,activeDaysCount:1}];
+const PRODUCTOS=["Tiras","cortes","tiras unidas","cubos","sin embolsar"];
+const COLORES={"Tiras":"#4299e1","cortes":"#68d391","tiras unidas":"#f6ad55","cubos":"#fc8181","sin embolsar":"#b794f4"};
+const DIAS=["L","M","M","J","V","S"];
+new Chart(document.getElementById("chartSemanal").getContext("2d"),{type:"bar",data:{labels:WEEKS.map(w=>w.label+(w.isPartial?"*":"")),datasets:[{label:"kg",data:WEEKS.map(w=>w.total),backgroundColor:WEEKS.map(w=>w.isPartial?"#90cdf4":"#2b6cb0"),borderRadius:7,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+" kg"}},x:{grid:{display:false}}}}});
+let cd;
+function bdd(wi){return PRODUCTOS.map(p=>({label:p,data:WEEKS[wi].dailyByProd[p],backgroundColor:COLORES[p],borderRadius:4,borderSkipped:false}));}
+function id(wi){if(cd)cd.destroy();cd=new Chart(document.getElementById("chartDiario").getContext("2d"),{type:"bar",data:{labels:DIAS,datasets:bdd(wi)},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true}}}});}
+document.getElementById("selDiario").addEventListener("change",function(){id(+this.value);});id(3);
+function bt(wi){const w=WEEKS[wi];const t=document.getElementById("tablaDetalle");let h="<thead><tr><th>Producto</th>";DIAS.forEach(d=>{h+=;});h+="<th>Total</th></tr></thead><tbody>";PRODUCTOS.forEach(p=>{const v=w.dailyByProd[p];const tot=v.reduce((a,b)=>a+b,0);if(!tot)return;h+=;v.forEach(x=>{h+=x>0?:;});h+=;});h+="<tr class='row-total'><td>TOTAL</td>";w.daily.forEach(v=>{h+=v>0?:;});h+=;const eb=w.entradaBandejasDia;h+="<tr class='row-entrada'><td>Entrada (bandejas)</td>";eb.forEach(v=>{h+=v>0?:;});h+=;h+="</tbody>";t.innerHTML=h;}
+document.getElementById("selTabla").addEventListener("change",function(){bt(+this.value);});bt(3);
 </script>
 </body>
 </html>
