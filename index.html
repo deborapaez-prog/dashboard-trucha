@@ -83,45 +83,46 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 <main>
 
   <div class="alerta">
-    📅 <strong>Semana actual (S23) en curso</strong> — lun 01/06: 161,0 kg · mar 02/06: 164,4 kg (incl. 80 kg sin embolsar) · mié 03/06: 71,4 kg · jue 04/06: entrada recibida (405 kg / 27 bandejas), producción sin registrar · vie 05/06: en curso. Uso S23: 31,9% (396,8 kg de 1.245 kg entrada). S22 completa (4 días).
+    📅 <strong>Semana actual (S23) en curso</strong> — lun 01/06: 161,0 kg · mar 02/06: 164,4 kg (incl. 80 kg sin embolsar) · mié 03/06: 195,9 kg (incl. 124,5 kg sin embolsar) · jue 04/06: 165,2 kg · vie 05/06: sin producción registrada. Acumulado S23: 686,5 kg. Uso S23: 41,6% (686,5 kg de 1.650 kg entrada). S22 completa (4 días).
   </div>
 
   <div class="kpi-grid">
     <div class="kpi-card">
       <div class="lbl">Semana actual (S23 — parcial)</div>
-      <div class="val">396,8 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">3 días c/prod · jue 04/06 entrada s/proc · vie 05/06 en curso</div>
+      <div class="val">686,5 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="sub">4 días c/prod · vie 05/06 sin producción registrada</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">Semana anterior (S22)</div>
       <div class="val" style="color:#4a5568">650,0 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
       <div class="sub">4 días activos (lun, mié, jue, vie)</div>
     </div>
-    <div class="kpi-card neg">
+    <div class="kpi-card">
       <div class="lbl">Variación S23 vs S22</div>
-      <div class="val">−38,9%</div>
-      <div class="sub">⚠ S23 parcial (3 días vs 4)</div>
+      <div class="val">+5,6%</div>
+      <div class="sub">S23 parcial (4 días vs 4 días)</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">Acumulado total</div>
-      <div class="val" style="color:#553c9a">2.894 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="val" style="color:#553c9a">3.183 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
       <div class="sub">4 semanas registradas</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">% uso S23 (parcial)</div>
-      <div class="val">31,9 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
-      <div class="sub">396,8 kg de 1.245 kg entrada · 3 días activos</div>
+      <div class="val">41,6 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
+      <div class="sub">686,5 kg de 1.650 kg entrada · 4 días activos</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">Prom. % uso general</div>
-      <div class="val">39,1 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
+      <div class="val">41,7 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
       <div class="sub">promedio S20 + S21 + S22 + S23</div>
     </div>
   </div>
 
   <!-- Gráfico semanal -->
   <div class="card">
-    <h2>📊 Evolución semanal — kg producidos totales</h2>
+    <h2>�
+ Evolución semanal — kg producidos totales</h2>
     <div class="chart-wrap">
       <canvas id="chartSemanal"></canvas>
     </div>
@@ -166,7 +167,7 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 
 <script>
 // ──────────────────────────────────────────────────────────────────────────────
-// DATOS INCRUSTADOS — actualizados el 05/06/2026 (S23 parcial: lun 01/06 161kg · mar 02/06 164,4kg · mié 03/06 71,4kg · jue 04/06 entrada recibida sin prod · vie 05/06 en curso)
+// DATOS INCRUSTADOS — actualizados el 05/06/2026 (S23 parcial: lun 01/06 161kg · mar 02/06 164,4kg · mié 03/06 195,9kg · jue 04/06 165,2kg · vie 05/06 sin prod)
 // ──────────────────────────────────────────────────────────────────────────────
 const WEEKS = [
   {
@@ -235,20 +236,20 @@ const WEEKS = [
     isoWeek: 23,
     dateRange: "01–05 jun",
     isPartial: true,
-    total: 396.775,
+    total: 686.5125,
     // índices: 0=L 1=M 2=M 3=J 4=V 5=S
-    daily: [161.0, 164.4, 71.375, 0, 0, 0],
+    daily: [161.0, 164.4, 195.875, 165.2375, 0, 0],
     dailyByProd: {
-      "Tiras":        [35.525, 29.4,  33.075, 0, 0, 0],
-      "cortes":       [14,     6,     4,      0, 0, 0],
-      "tiras unidas": [37.975, 49,    34.3,   0, 0, 0],
-      "cubos":        [73.5,   0,     0,      0, 0, 0],
-      "sin embolsar": [0,      80,    0,      0, 0, 0]
+      "Tiras":        [35.525, 29.4,  33.075, 31.2375, 0, 0],
+      "cortes":       [14,     6,     4,      22,      0, 0],
+      "tiras unidas": [37.975, 49,    34.3,   63.7,    0, 0],
+      "cubos":        [73.5,   0,     0,      48.3,    0, 0],
+      "sin embolsar": [0,      80,    124.5,  0,       0, 0]
     },
     entradaBandejasDia: [29, 26, 28, 27, 0, 0],
-    promedioCajas: 27.67,
-    promedioUso: 31.87,
-    activeDaysCount: 3
+    promedioCajas: 27.5,
+    promedioUso: 41.61,
+    activeDaysCount: 4
   }
 ];
 
