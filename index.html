@@ -77,20 +77,20 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 
 <header>
   <h1>🐟 Producción Trucha — Brugali</h1>
-  <span class="badge">📅 Actualizado: 05/06/2026 — auto</span>
+  <span class="badge">📅 Actualizado: 08/06/2026 — auto</span>
 </header>
 
 <main>
 
   <div class="alerta">
-    📅 <strong>Semana actual (S23) en curso</strong> — lun 01/06: 161,0 kg · mar 02/06: 164,4 kg (incl. 80 kg sin embolsar) · mié 03/06: 195,9 kg (incl. 124,5 kg sin embolsar) · jue 04/06: 165,2 kg · vie 05/06: sin producción registrada. Acumulado S23: 686,5 kg. Uso S23: 41,6% (686,5 kg de 1.650 kg entrada). S22 completa (4 días).
+    ⚠️ <strong>S23 completa (5 días): 864,9 kg · 41,8% uso</strong> — por debajo del objetivo semanal de 1.067,2 kg. S24 en curso desde hoy lunes 08/06, sin producción registrada aún. Detalle S23: lun 161,0 · mar 164,4 (incl. 80 kg sin embolsar) · mié 195,9 (incl. 124,5 kg sin embolsar) · jue 165,2 · vie 178,4 kg.
   </div>
 
   <div class="kpi-grid">
     <div class="kpi-card">
-      <div class="lbl">Semana actual (S23 — parcial)</div>
-      <div class="val">686,5 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">4 días c/prod · vie 05/06 sin producción registrada</div>
+      <div class="lbl">Última semana (S23)</div>
+      <div class="val">864,9 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="sub">5 días activos (lun–vie) · completada</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">Semana anterior (S22)</div>
@@ -99,30 +99,29 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
     </div>
     <div class="kpi-card">
       <div class="lbl">Variación S23 vs S22</div>
-      <div class="val">+5,6%</div>
-      <div class="sub">S23 parcial (4 días vs 4 días)</div>
+      <div class="val">+33,1%</div>
+      <div class="sub">S23 completada (5 días vs 4 días)</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">Acumulado total</div>
-      <div class="val" style="color:#553c9a">3.183 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">4 semanas registradas</div>
+      <div class="val" style="color:#553c9a">3.362 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="sub">4 semanas registradas (S20–S23)</div>
     </div>
     <div class="kpi-card">
-      <div class="lbl">% uso S23 (parcial)</div>
-      <div class="val">41,6 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
-      <div class="sub">686,5 kg de 1.650 kg entrada · 4 días activos</div>
+      <div class="lbl">% uso S23</div>
+      <div class="val">41,8 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
+      <div class="sub">864,9 kg de 2.070 kg entrada · 5 días activos</div>
     </div>
     <div class="kpi-card">
-      <div class="lbl">Prom. % uso general</div>
+      <div class="lbl">% uso general</div>
       <div class="val">41,7 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
-      <div class="sub">promedio S20 + S21 + S22 + S23</div>
+      <div class="sub">S20 + S21 + S22 + S23 completas</div>
     </div>
   </div>
 
   <!-- Gráfico semanal -->
   <div class="card">
-    <h2>�
- Evolución semanal — kg producidos totales</h2>
+    <h2>📊 Evolución semanal — kg producidos totales</h2>
     <div class="chart-wrap">
       <canvas id="chartSemanal"></canvas>
     </div>
@@ -136,7 +135,7 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
         <option value="0">S20 — 11 al 16/05</option>
         <option value="1">S21 — 18–22/05</option>
         <option value="2">S22 — 25–29/05</option>
-        <option value="3" selected>S23 — 01–05/06 (parcial)</option>
+        <option value="3" selected>S23 — 01–05/06</option>
       </select>
     </h2>
     <div class="chart-wrap">
@@ -153,7 +152,7 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
         <option value="0">S20 — 11 al 16/05</option>
         <option value="1">S21 — 18–22/05</option>
         <option value="2">S22 — 25–29/05</option>
-        <option value="3" selected>S23 — 01–05/06 (parcial)</option>
+        <option value="3" selected>S23 — 01–05/06</option>
       </select>
     </h2>
     <div class="table-wrap">
@@ -167,7 +166,7 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 
 <script>
 // ──────────────────────────────────────────────────────────────────────────────
-// DATOS INCRUSTADOS — actualizados el 05/06/2026 (S23 parcial: lun 01/06 161kg · mar 02/06 164,4kg · mié 03/06 195,9kg · jue 04/06 165,2kg · vie 05/06 sin prod)
+// DATOS INCRUSTADOS — actualizados el 08/06/2026 (S23 completa 5 días: 864,9 kg · 41,8% uso · S24 en curso sin datos)
 // ──────────────────────────────────────────────────────────────────────────────
 const WEEKS = [
   {
@@ -235,21 +234,21 @@ const WEEKS = [
     label: "S23",
     isoWeek: 23,
     dateRange: "01–05 jun",
-    isPartial: true,
-    total: 686.5125,
+    isPartial: false,
+    total: 864.9375,
     // índices: 0=L 1=M 2=M 3=J 4=V 5=S
-    daily: [161.0, 164.4, 195.875, 165.2375, 0, 0],
+    daily: [161.0, 164.4, 195.875, 165.2375, 178.425, 0],
     dailyByProd: {
-      "Tiras":        [35.525, 29.4,  33.075, 31.2375, 0, 0],
-      "cortes":       [14,     6,     4,      22,      0, 0],
-      "tiras unidas": [37.975, 49,    34.3,   63.7,    0, 0],
-      "cubos":        [73.5,   0,     0,      48.3,    0, 0],
-      "sin embolsar": [0,      80,    124.5,  0,       0, 0]
+      "Tiras":        [35.525, 29.4,  33.075, 31.2375, 40.425, 0],
+      "cortes":       [14,     6,     4,      22,      19,     0],
+      "tiras unidas": [37.975, 49,    34.3,   63.7,    68.6,   0],
+      "cubos":        [73.5,   0,     0,      48.3,    50.4,   0],
+      "sin embolsar": [0,      80,    124.5,  0,       0,      0]
     },
-    entradaBandejasDia: [29, 26, 28, 27, 0, 0],
-    promedioCajas: 27.5,
-    promedioUso: 41.61,
-    activeDaysCount: 4
+    entradaBandejasDia: [29, 26, 28, 27, 28, 0],
+    promedioCajas: 27.6,
+    promedioUso: 41.8,
+    activeDaysCount: 5
   }
 ];
 
