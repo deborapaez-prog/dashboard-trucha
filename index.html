@@ -77,20 +77,20 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 
 <header>
   <h1>🐟 Producción Trucha — Brugali</h1>
-  <span class="badge">📅 Actualizado: 11/06/2026 — auto</span>
+  <span class="badge">📅 Actualizado: 12/06/2026 — auto</span>
 </header>
 
 <main>
 
   <div class="alerta">
-    ⚠️ <strong>S24 en curso (3 días, lun–mié): 524,0 kg · 39,7% uso</strong> — miércoles 10/06 se completó la carga: 172,4 kg · 38,3% uso (día más bajo de la semana). Jueves 11/06 sin producción registrada al momento de la actualización (2 ausencias). S23 completa cerró en 1.043,6 kg · 41,9% uso, por debajo del objetivo semanal de 1.067,2 kg.
+    ⚠️ <strong>S24 en curso (4 días, lun–jue): 655,4 kg · 37,0% uso</strong> — jueves 11/06 se completó la carga: 131,4 kg · 29,2% uso (día más bajo de la semana). Viernes 12/06 sin producción registrada al momento de la actualización (2 ausencias). S23 completa cerró en 1.043,6 kg · 41,9% uso, por debajo del objetivo semanal de 1.067,2 kg.
   </div>
 
   <div class="kpi-grid">
     <div class="kpi-card">
-      <div class="lbl">S24 en curso (3 días)</div>
-      <div class="val">524,0 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">lun 08 a mié 10/06 · semana parcial</div>
+      <div class="lbl">S24 en curso (4 días)</div>
+      <div class="val">655,4 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="sub">lun 08 a jue 11/06 · semana parcial</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">Semana anterior (S23)</div>
@@ -104,17 +104,17 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
     </div>
     <div class="kpi-card">
       <div class="lbl">Acumulado total</div>
-      <div class="val" style="color:#553c9a">4.064 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="val" style="color:#553c9a">4.196 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
       <div class="sub">5 semanas registradas (S20–S24)</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">% uso S24</div>
-      <div class="val">39,7 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
-      <div class="sub">524,0 kg de 1.320 kg entrada · 3 días activos</div>
+      <div class="val">37,0 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
+      <div class="sub">655,4 kg de 1.770 kg entrada · 4 días activos</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">% uso general</div>
-      <div class="val">41,5 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
+      <div class="val">41,0 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
       <div class="sub">S20 + S21 + S22 + S23 + S24 (parcial)</div>
     </div>
   </div>
@@ -136,7 +136,7 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
         <option value="1">S21 — 18–22/05</option>
         <option value="2">S22 — 25–29/05</option>
         <option value="3">S23 — 01–06/06</option>
-        <option value="4" selected>S24 — 08–10/06 (en curso)</option>
+        <option value="4" selected>S24 — 08–11/06 (en curso)</option>
       </select>
     </h2>
     <div class="chart-wrap">
@@ -154,7 +154,7 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
         <option value="1">S21 — 18–22/05</option>
         <option value="2">S22 — 25–29/05</option>
         <option value="3">S23 — 01–06/06</option>
-        <option value="4" selected>S24 — 08–10/06 (en curso)</option>
+        <option value="4" selected>S24 — 08–11/06 (en curso)</option>
       </select>
     </h2>
     <div class="table-wrap">
@@ -168,7 +168,7 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 
 <script>
 // ──────────────────────────────────────────────────────────────────────────────
-// DATOS INCRUSTADOS — actualizados el 11/06/2026 (S24 en curso 3 días: 524,0 kg · 39,7% uso · jue 11/06 sin producción registrada)
+// DATOS INCRUSTADOS — actualizados el 12/06/2026 (S24 en curso 4 días: 655,4 kg · 37,0% uso · vie 12/06 sin producción registrada)
 // ──────────────────────────────────────────────────────────────────────────────
 const WEEKS = [
   {
@@ -255,22 +255,22 @@ const WEEKS = [
   {
     label: "S24",
     isoWeek: 24,
-    dateRange: "08–10 jun",
+    dateRange: "08–11 jun",
     isPartial: true,
-    total: 524.025,
+    total: 655.415,
     // índices: 0=L 1=M 2=M 3=J 4=V 5=S
-    daily: [170.6, 181.075, 172.35, 0, 0, 0],
+    daily: [170.6, 181.075, 172.35, 131.39, 0, 0],
     dailyByProd: {
-      "Tiras":        [31.85, 33.075, 31.85, 0, 0, 0],
-      "cortes":       [21.5,  22,     21.5,  0, 0, 0],
-      "tiras unidas": [71.05, 66.15,  68.6,  0, 0, 0],
-      "cubos":        [46.2,  59.85,  50.4,  0, 0, 0],
+      "Tiras":        [31.85, 33.075, 31.85, 31.85, 0, 0],
+      "cortes":       [21.5,  22,     21.5,  14,    0, 0],
+      "tiras unidas": [71.05, 66.15,  68.6,  51.94, 0, 0],
+      "cubos":        [46.2,  59.85,  50.4,  33.6,  0, 0],
       "sin embolsar": [0,     0,      0, 0, 0, 0]
     },
-    entradaBandejasDia: [28, 30, 30, 0, 0, 0],
-    promedioCajas: 29.33,
-    promedioUso: 39.7,
-    activeDaysCount: 3
+    entradaBandejasDia: [28, 30, 30, 30, 0, 0],
+    promedioCajas: 29.5,
+    promedioUso: 37.03,
+    activeDaysCount: 4
   }
 ];
 
