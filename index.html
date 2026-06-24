@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Dashboard Produccion Trucha",
+  "schemaVersion": 1,
+  "mcpTools": [],
+  "mcpServerNames": [],
+  "description": "Dashboard de producción semanal de trucha — Cocina Fría, Brugali. Actualizado automáticamente cada día hábil."
+}
+</script>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -77,13 +85,13 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 
 <header>
   <h1>🐟 Producción Trucha — Brugali</h1>
-  <span class="badge">📅 Actualizado: 22/06/2026 — auto</span>
+  <span class="badge">📅 Actualizado: 24/06/2026 — auto</span>
 </header>
 
 <main>
 
   <div class="alerta">
-    ✅ <strong>S25 cerrada: 712,6 kg · 41,7% uso (4 días activos, lun 15 – vie 19/06).</strong> S26 inicia hoy lun 22/06, sin producción registrada aún. S24 cerrada con 858,2 kg · 39,2% uso (5 días). Objetivo semanal: 1.067,2 kg.
+    ✅ <strong>S25 cerrada: 712,6 kg · 41,7% uso (4 días activos, lun 15 – vie 19/06).</strong> S26 en curso: 312,8 kg · 40,1% uso · 2 días activos (lun 22 – mar 23/06). Objetivo semanal: 1.067,2 kg.
   </div>
 
   <div class="kpi-grid">
@@ -94,28 +102,28 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
     </div>
     <div class="kpi-card">
       <div class="lbl">Semana anterior (S24)</div>
-      <div class="val" style="color:#4a5568">858,2 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">5 días activos (lun 08 – vie 12/06)</div>
+      <div class="val" style="color:#4a5568">978,4 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="sub">6 días activos (lun 08 – sáb 13/06)</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">Variación S25 vs S24</div>
-      <div class="val" style="color:#276749">+3,8%</div>
-      <div class="sub">178,1 kg/día vs 171,6 kg/día</div>
+      <div class="val" style="color:#276749">+9,2%</div>
+      <div class="sub">178,1 kg/día vs 163,1 kg/día</div>
     </div>
     <div class="kpi-card">
       <div class="lbl">Acumulado total</div>
-      <div class="val" style="color:#553c9a">5.111,1 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
-      <div class="sub">S20–S25</div>
+      <div class="val" style="color:#553c9a">5.544,1 <span style="font-size:.9rem;color:#a0aec0">kg</span></div>
+      <div class="sub">S20–S26 (incl. S26 parcial)</div>
     </div>
     <div class="kpi-card">
-      <div class="lbl">% uso S25</div>
-      <div class="val">41,7 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
-      <div class="sub">712,6 kg de 1.710 kg entrada · 4 días activos</div>
+      <div class="lbl">% uso S26 (semana actual)</div>
+      <div class="val">40,1 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
+      <div class="sub">2 días activos · 312,8 kg de 780 kg entrada</div>
     </div>
     <div class="kpi-card">
-      <div class="lbll">% uso general</div>
-      <div class="val">41,3 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
-      <div class="sub">S20 + S21 + S22 + S23 + S24 + S25</div>
+      <div class="lbl">% uso general</div>
+      <div class="val">41,2 <span style="font-size:.9rem;color:#a0aec0">%</span></div>
+      <div class="sub">S20 + S21 + S22 + S23 + S24 + S25 + S26</div>
     </div>
   </div>
 
@@ -134,10 +142,11 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
       <select id="selDiario">
         <option value="0">S20 — 11 al 16/05</option>
         <option value="1">S21 — 18–22/05</option>
-        <option value="2">S22 — 15–29/05</option>
+        <option value="2">S22 — 25–29/05</option>
         <option value="3">S23 — 01–06/06</option>
-        <option value="4">S24 — 08–12/06</option>
+        <option value="4">S24 — 08–13/06</option>
         <option value="5" selected>S25 — 15–19/06</option>
+        <option value="6">S26 — 22–27/06 ⚠ parcial</option>
       </select>
     </h2>
     <div class="chart-wrap">
@@ -153,10 +162,11 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
       <select id="selTabla">
         <option value="0">S20 — 11 al 16/05</option>
         <option value="1">S21 — 18–22/05</option>
-        <option value="2">S22 — 15–29/05</option>
+        <option value="2">S22 — 25–29/05</option>
         <option value="3">S23 — 01–06/06</option>
-        <option value="4">S24 — 08–12/06</option>
+        <option value="4">S24 — 08–13/06</option>
         <option value="5" selected>S25 — 15–19/06</option>
+        <option value="6">S26 — 22–27/06 ⚠ parcial</option>
       </select>
     </h2>
     <div class="table-wrap">
@@ -166,12 +176,12 @@ footer { text-align: center; color: #a0aec0; font-size: 0.76rem; padding: 20px 0
 
 </main>
 
-<footer>Brugali — Ingeniería de Procesos · Cocina Fría �Dashboard generado automáticamente</footer>
+<footer>Brugali — Ingeniería de Procesos · Cocina Fría · Dashboard generado automáticamente</footer>
 
 <script>
-// ──────────────────────────────────────────────────────────────────────────────
-// DATOS INCRUSTADOS — actualizados el 22/06/2026 (S25 completa 4 días: 712,6 kg · 41,7% uso)
-// ──────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// DATOS INCRUSTADOS — actualizados el 24/06/2026 (S26 en curso: 312,8 kg · 40,1% uso · 2 días activos lun 22–mar 23/06)
+// ────────────────────────────────────────────────────────────────────────────────
 const WEEKS = [
   {
     label: "S20",
@@ -188,7 +198,6 @@ const WEEKS = [
       "cubos":        [38.5,   49,     105,    0,     45.5,  17.5],
       "sin embolsar": [0,      39.175, 0,      104.8, 0,     0]
     },
-    // entradaKg / 15 = bandejas
     entradaBandejasDia: [24, 29, 28, 30, 28, 17],
     promedioCajas: 26.0,
     promedioUso: 39.0,
@@ -200,7 +209,6 @@ const WEEKS = [
     dateRange: "18–22 may",
     isPartial: false,
     total: 915.525,
-    // índices: 0=L 1=M 2=M 3=J 4=V 5=S
     daily: [188.1, 185.8, 178.575, 180.275, 182.775, 0],
     dailyByProd: {
       "Tiras":        [41.7,  34.3,   47.775, 39.2,   45.325, 0],
@@ -220,7 +228,6 @@ const WEEKS = [
     dateRange: "25–29 may",
     isPartial: false,
     total: 650.0,
-    // índices: 0=L 1=M 2=M 3=J 4=V 5=S
     daily: [140.25, 0, 174.9, 159.8, 175.05, 0],
     dailyByProd: {
       "Tiras":        [36.75, 0, 33.1,  33.7,  26.95, 0],
@@ -240,7 +247,6 @@ const WEEKS = [
     dateRange: "01–06 jun",
     isPartial: false,
     total: 1043.5625,
-    // índices: 0=L 1=M 2=M 3=J 4=V 5=S
     daily: [161.0, 164.4, 195.875, 165.2375, 178.425, 178.625],
     dailyByProd: {
       "Tiras":        [35.525, 29.4,  33.075, 31.2375, 40.425, 44.1],
@@ -257,22 +263,21 @@ const WEEKS = [
   {
     label: "S24",
     isoWeek: 24,
-    dateRange: "08–12 jun",
+    dateRange: "08–13 jun",
     isPartial: false,
-    total: 858.24,
-    // índices: 0=L 1=M 2=M 3=J 4=V 5=S
-    daily: [170.6, 181.075, 172.35, 185.865, 148.35, 0],
+    total: 978.435,
+    daily: [170.6, 181.075, 172.35, 185.865, 148.35, 120.2],
     dailyByProd: {
-      "Tiras":        [31.85, 33.075, 31.85,  31.85,  17.15, 0],
-      "cortes":       [21.5,  22,     21.5,   14,     22,    0],
-      "tiras unidas": [71.05, 66.15,  68.6,   51.94,  58.8,  0],
-      "cubos":        [46.2,  59.85,  50.4,   33.6,   50.4,  0],
-      "sin embolsar": [0,     0,      0,      54.475, 0,     0]
+      "Tiras":        [31.85, 33.075, 31.85,  31.85,  17.15,  22.05],
+      "cortes":       [21.5,  22,     21.5,   14,     22,     18],
+      "tiras unidas": [71.05, 66.15,  68.6,   51.94,  58.8,   46.55],
+      "cubos":        [46.2,  59.85,  50.4,   33.6,   50.4,   33.6],
+      "sin embolsar": [0,     0,      0,      54.475, 0,      0]
     },
-    entradaBandejasDia: [28, 30, 30, 30, 28, 0],
-    promedioCajas: 29.2,
-    promedioUso: 39.19,
-    activeDaysCount: 5
+    entradaBandejasDia: [28, 30, 30, 30, 28, 20],
+    promedioCajas: 27.67,
+    promedioUso: 39.29,
+    activeDaysCount: 6
   },
   {
     label: "S25",
@@ -280,7 +285,6 @@ const WEEKS = [
     dateRange: "15–19 jun",
     isPartial: false,
     total: 712.565,
-    // índices: 0=L 1=M(16/06 sin prod) 2=M(17/06) 3=J 4=V 5=S
     daily: [157.1, 0, 189.975, 192.465, 173.025, 0],
     dailyByProd: {
       "Tiras":        [26.95,  0, 35.525, 41.65,  40.425, 0],
@@ -293,9 +297,27 @@ const WEEKS = [
     promedioCajas: 28.5,
     promedioUso: 41.67,
     activeDaysCount: 4
+  },
+  {
+    label: "S26",
+    isoWeek: 26,
+    dateRange: "22–27 jun",
+    isPartial: true,
+    total: 312.8,
+    daily: [120.2, 192.6, 0, 0, 0, 0],
+    dailyByProd: {
+      "Tiras":        [22.05, 34.3,  0, 0, 0, 0],
+      "cortes":       [18,    26,    0, 0, 0, 0],
+      "tiras unidas": [46.55, 73.5,  0, 0, 0, 0],
+      "cubos":        [33.6,  58.8,  0, 0, 0, 0],
+      "sin embolsar": [0,     0,     0, 0, 0, 0]
+    },
+    entradaBandejasDia: [20, 32, 0, 0, 0, 0],
+    promedioCajas: 26,
+    promedioUso: 40.1,
+    activeDaysCount: 2
   }
 ];
-
 const PRODUCTOS = ["Tiras", "cortes", "tiras unidas", "cubos", "sin embolsar"];
 const COLORES = {
   "Tiras":        "#4299e1",
@@ -306,7 +328,6 @@ const COLORES = {
 };
 const DIAS = ["L", "M", "M", "J", "V", "S"];
 
-// ── Gráfico 1: barras semanales ───────────────────────────────────────────────
 new Chart(document.getElementById("chartSemanal").getContext("2d"), {
   type: "bar",
   data: {
@@ -336,7 +357,6 @@ new Chart(document.getElementById("chartSemanal").getContext("2d"), {
   }
 });
 
-// ── Gráfico 2: barras apiladas diarias ────────────────────────────────────────
 let chartDiario;
 
 function buildDiarioDatasets(wi) {
@@ -371,7 +391,6 @@ function initDiario(wi) {
 document.getElementById("selDiario").addEventListener("change", function() { initDiario(+this.value); });
 initDiario(5);
 
-// ── Tabla detalle ─────────────────────────────────────────────────────────────
 function buildTabla(wi) {
   const w = WEEKS[wi];
   const t = document.getElementById("tablaDetalle");
@@ -382,18 +401,15 @@ function buildTabla(wi) {
   PRODUCTOS.forEach(p => {
     const vals = w.dailyByProd[p];
     const tot = vals.reduce((a, b) => a + b, 0);
-    if (tot === 0) return; // ocultar filas vacías para claridad
-    h += `<tr><td><span class="dot" style="background:${COLORES[p]}"></span>${p}</td>`;
+    if (tot === 0) return; h += `<tr><td><span class="dot" style="background:${COLORES[p]}"></span>${p}</td>`;
     vals.forEach(v => { h += v > 0 ? `<td>${v.toFixed(2)}</td>` : `<td class="cero">—</td>`; });
     h += `<td><strong>${tot.toFixed(2)}</strong></td></tr>`;
   });
 
-  // fila totales
   h += `<tr class="row-total"><td>TOTAL</td>`;
   w.daily.forEach(v => { h += v > 0 ? `<td>${v.toFixed(2)}</td>` : `<td class="cero">—</td>`; });
   h += `<td>${w.total.toFixed(2)}</td></tr>`;
 
-  // fila entrada en bandejas
   const eb = w.entradaBandejasDia;
   const totEB = eb.reduce((a,b)=>a+b,0);
   h += `<tr class="row-entrada"><td>Entrada (bandejas)</td>`;
